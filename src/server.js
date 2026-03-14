@@ -2,7 +2,19 @@ const express = require("express")
 const { verifyEmail } = require("./verifyEmail")
 
 const app = express()
+
 app.use(express.json())
+
+// simple request logger
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} ${req.method} ${req.url}`)
+  next()
+})
+
+// health check endpoint
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", service: "email-verifier" })
+})
 
 app.post("/verify-email", async (req, res) => {
 

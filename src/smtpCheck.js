@@ -72,14 +72,14 @@ async function checkMailbox(mxHost, email) {
 
     connection.on("error", (error) => {
 
-      resolve({
-        valid: null,
-        code: err?.responseCode || null,
-        message: err?.message || "connection_error"
-      })
-
+        resolve({
+            valid: null,
+            code: error?.responseCode || null,
+            message: error?.message || "connection_error"
+        })
 
     })
+
 
   })
 
